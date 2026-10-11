@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-concrete: #E8EAEC;
+  --color-ballpoint: #1F2FD0;
+  --color-tyvek: #FFFFFF;
+  --color-flag-lime: #C8F03C;
+  --color-flag-pink: #FF3D81;
+  --color-tape-black: #000000;
+
+  --radius-tag: 4px;
+  --radius-button: 14px;
+  --radius-photo: 2px;
+}
+
+body {
+  background-color: var(--color-concrete);
+  color: var(--color-tape-black);
+  font-family: var(--font-literata), Georgia, serif;
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Diagonal hatched background pattern for excluded tiles & camera placeholders */
+.bg-hatched {
+  background: repeating-linear-gradient(
+    -45deg,
+    #E8EAEC,
+    #E8EAEC 10px,
+    #D0D4D8 10px,
+    #D0D4D8 20px
+  );
+}
+
+.bg-hatched-white {
+  background: repeating-linear-gradient(
+    -45deg,
+    #FFFFFF,
+    #FFFFFF 8px,
+    #D8DCE0 8px,
+    #D8DCE0 16px
+  );
+}
+
+/* Flagging Tape Slap: exactly ~240ms tactile impact */
+@keyframes tapeSlap {
+  0% {
+    transform: rotate(-7deg) scale(1.35) translateY(-20px);
+    opacity: 0;
+  }
+  65% {
+    transform: rotate(-7deg) scale(0.97) translateY(2px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-7deg) scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-tape-slap {
+  animation: tapeSlap 240ms cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+/* Accessibility: gracefully degrade motion to opacity fade on reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-tape-slap {
+    animation: none;
+    transform: rotate(-7deg) scale(1) translateY(0);
+    opacity: 1;
+    transition: opacity 240ms ease-out;
+  }
+}
+
+/* Safe area thumb zone */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+}

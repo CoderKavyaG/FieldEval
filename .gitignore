@@ -1,0 +1,16 @@
+# Environment variables
+.env*
+!.env.example
+
+# Node dependencies
+node_modules/
+
+# Spike images
+spike/images/
+
+# Build artifacts
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
